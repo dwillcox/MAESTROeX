@@ -4,7 +4,7 @@ Use yt to plot the integrated energy generation rate over
 concentric spheres of varying radius from the center
 of the star outward.
 
-Energy generation rate is SUM(enucdot * density * cell volume)
+Energy generation rate is SUM(Hnuc * rho * cell volume)
 and has units of erg/s
 
 Donald E. Willcox
@@ -30,7 +30,7 @@ args = parser.parse_args()
 
 @derived_field(name="edot", units="erg/s")
 def _edot(field, data):
-    return data[('boxlib', 'enucdot')] * data[('boxlib', 'density')] * data[('gas', 'cell_volume')]
+    return data[('boxlib', 'Hnuc')] * data[('boxlib', 'rho')] * data[('gas', 'cell_volume')]
 
 def get_max_radius(ds):
     # Given dataset ds, get the maximum radius of an inscribing sphere

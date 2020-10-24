@@ -67,7 +67,7 @@ else:
 if args.rhocontours:
     for rhoc in args.rhocontours:
         rhounit = yt.YTQuantity(rhoc, 'g/(cm**3)')
-        s.annotate_contour('density', ncont=1, clim=(rhounit, rhounit))
+        s.annotate_contour('rho', ncont=1, clim=(rhounit, rhounit))
 
 if args.logmax:
     log_max_val = args.logmax
