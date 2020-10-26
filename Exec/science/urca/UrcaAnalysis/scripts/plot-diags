@@ -65,40 +65,29 @@ class Diagnostics(object):
                 lines.append(ls)
         f.close()
 
+        headerline = lines[0]
+
+        # Get column headers
+        lhh = headerline.split('  ')
+        for h in lhh:
+            hs = h.strip()
+            if hs:
+                self.data[hs] = []
+                self.columns.append(hs)
+
+        timeindex = self.columns.index('time')
+
         # Read data from lines
-        getheader = True        
-        for l in lines:
-            # Check for header (save the first one)
-            if l[0]=='#':
-                if getheader:
-                    lh = l[2:]
-                    if (not ':' in l) and ('time' in l):
-                        # Get column headers
-                        lhh = lh.split('  ')
-                        for h in lhh:
-                            hs = h.strip()
-                            if hs:
-                                self.data[hs] = []
-                                self.columns.append(hs)
-                    else:
-                        # Get job metadata
-                        h, v = lh.split(':', maxsplit=1)
-                        h = h.strip()
-                        v = v.strip()
-                        self.header[h] = v
-            # Read column data
-            else:
-                getheader = False
-                timeindex = self.columns.index('time')
-                ls = l.split()
-                xvals = [float(lsi) for lsi in ls]
-                xtime = xvals[timeindex]
-                # print('----')
-                # print('{}, time = {}'.format(len(self.data['time']), xtime))
-                self.trimdata(xtime)
-                # print('----')
-                for c, x in zip(self.columns, xvals):
-                    self.data[c].append(x)
+        for l in lines[1:]:
+            ls = l.split()
+            xvals = [float(lsi) for lsi in ls]
+            xtime = xvals[timeindex]
+            # print('----')
+            # print('{}, time = {}'.format(len(self.data['time']), xtime))
+            self.trimdata(xtime)
+            # print('----')
+            for c, x in zip(self.columns, xvals):
+                self.data[c].append(x)
 
         # Convert lists to arrays
         for k in self.data.keys():
@@ -142,7 +131,7 @@ class SimulationDiagnostics(object):
         ntime = 'time'
         
         xgrav = np.array([])
-        ngrav = 'grav pot energy'
+        ngrav = 'tot grav energy'
         
         xeint = np.array([])
         neint = 'tot int energy'

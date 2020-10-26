@@ -8,8 +8,8 @@ import argparse
 
 parser = argparse.ArgumentParser()
 parser.add_argument('infile', type=str, help='Name of input plotfile.')
-parser.add_argument('-f', '--field', type=str, default='density',
-                    help='Name of the field to plot. Eg. "tfromp". Default is density.')
+parser.add_argument('-f', '--field', type=str, default='rho',
+                    help='Name of the field to plot. Eg. "tfromp". Default is rho.')
 parser.add_argument('-axis', '--axis', type=str, default='x',
                     help='Axis along which to take the lineout. Default is "x". Can be "x", "y", or "z".')
 parser.add_argument('-w', '--width', type=float,

@@ -68,7 +68,7 @@ def doit(ds):
     for vel in [("gas", "velocity_x"), ("gas", "velocity_y"), 
                 ("gas", "velocity_z")]:
 
-        Kk += 0.5*fft_comp(ds, ("gas", "density"), vel,
+        Kk += 0.5*fft_comp(ds, ("gas", "rho"), vel,
                            nindex_rho, max_level, low, dims)
 
     # wavenumbers

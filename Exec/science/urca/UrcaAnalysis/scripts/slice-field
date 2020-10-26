@@ -75,7 +75,7 @@ def slicefield(ds, field, field_short_name):
     if args.rhocontours:
         for rhoc in args.rhocontours:
             rhounit = yt.YTQuantity(rhoc, 'g/(cm**3)')
-            s.annotate_contour('density', ncont=1, clim=(rhounit, rhounit), plot_args={'colors':args.rhocolors})
+            s.annotate_contour('rho', ncont=1, clim=(rhounit, rhounit), plot_args={'colors':args.rhocolors})
 
     # Colormaps and Scaling
     maxv = ds.all_data().max(field)
